@@ -4,7 +4,7 @@ var rows = 20;
 var cols = 20;
 var board;
 var context;
-var canvasColor = "black";
+var canvasColor = "rgb(15, 15, 15)";
 
 //snake head
 var snakeX = blockSize * 1;
@@ -25,7 +25,9 @@ var foodColor = "red";
 
 var score = 0;
 var resetbtn = document.querySelector(".resetbtn");
-var title = document.querySelector("#title");
+var resetbtn2 = document.querySelector(".resetbtn2");
+var title = document.querySelector(".title");
+var cover = document.querySelector(".cover");
 
 var gameOver = false;
 
@@ -48,10 +50,12 @@ function update(){
     context.fillRect(foodX, foodY, blockSize, blockSize);
 
     if(snakeX == foodX && snakeY == foodY){
-        score += 1;
-        document.querySelector(".score").innerHTML = score;
-        snakeBody.push([foodX, foodY]);
-        placeFood();
+        if(gameOver != true){
+            score += 1;
+            document.querySelector(".score").innerHTML = score;
+            snakeBody.push([foodX, foodY]);
+            placeFood();
+        }
     }
 
     for(let i = snakeBody.length-1; i > 0; i--){
@@ -78,8 +82,12 @@ function update(){
     for (let i = 0; i < snakeBody.length; i++) {
         if (snakeX == snakeBody[i][1] && snakeY == snakeBody[i][0]) {
             gameOver = true;
-
         }
+    }
+
+    if(gameOver == true){
+        cover.style.display = "flex";
+        document.querySelector(".score2").innerHTML = score;
     }
 }
 
@@ -107,5 +115,9 @@ function placeFood() {
 }
 
 resetbtn.addEventListener("click", function(){
-    console.log("reset");
-})
+    window.location.reload();
+});
+
+resetbtn2.addEventListener("click", function(){
+    window.location.reload();
+});
