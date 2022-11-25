@@ -7,8 +7,8 @@ var context;
 var canvasColor = "rgb(15, 15, 15)";
 
 //snake head
-var snakeX = blockSize * 1;
-var snakeY = blockSize * 1;
+var snakeX = blockSize * 10;
+var snakeY = blockSize * 10;
 var snakeColor = "yellow";
 
 var velocityX = 0;
@@ -22,6 +22,9 @@ var snakeBody = [];
 var foodX;
 var foodY;
 var foodColor = "red";
+
+//sounds
+var popsound = new Audio('img/pop.mp3');
 
 var score = 0;
 var resetbtn = document.querySelector(".resetbtn");
@@ -55,6 +58,7 @@ function update(){
             document.querySelector(".score").innerHTML = score;
             snakeBody.push([foodX, foodY]);
             placeFood();
+            popsound.play();
         }
     }
 
