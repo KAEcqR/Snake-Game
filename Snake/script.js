@@ -24,7 +24,13 @@ var foodY;
 var foodColor = "red";
 
 //sounds
-var popsound = new Audio('img/pop.mp3');
+var eat = new Audio('img/eat.mp3');
+var lose = new Audio('img/lose.mp3');
+var left = new Audio('img/left.mp3');
+var right = new Audio('img/right.mp3');
+var up = new Audio('img/up.mp3');
+var bot = new Audio('img/bot.mp3');
+var reset = new Audio('img/reset.mp3')
 
 var score = 0;
 var resetbtn = document.querySelector(".resetbtn");
@@ -58,7 +64,7 @@ function update(){
             document.querySelector(".score").innerHTML = score;
             snakeBody.push([foodX, foodY]);
             placeFood();
-            popsound.play();
+            eat.play();
         }
     }
 
@@ -79,38 +85,60 @@ function update(){
     }
 
     //game Over
+
+
     if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows*blockSize) {
         gameOver = true;
+        snakeY = 10;
+        snakeX = 10;
+        velocityX = 0;
+        velocityY = 0;
+        snakeBody = 0;
+        lose.play();
     }
 
     for (let i = 0; i < snakeBody.length; i++) {
         if (snakeX == snakeBody[i][1] && snakeY == snakeBody[i][0]) {
             gameOver = true;
+            snakeY = 10;
+            snakeX = 10;
+            velocityX = 0;
+            velocityY = 0;
+            snakeBody = 0;
+            lose.play();
         }
     }
 
     if(gameOver == true){
-        cover.style.display = "flex";
-        document.querySelector(".score2").innerHTML = score;
+        setgameover();
     }
+}
+
+function setgameover(){
+    cover.style.display = "flex";
+    document.querySelector(".score2").innerHTML = score;
 }
 
 function changeDirection(e) {
     if (e.code == "ArrowUp" && velocityY != 1) {
         velocityX = 0;
         velocityY = -1;
+        up.play();
     }
     else if (e.code == "ArrowDown" && velocityY != -1) {
         velocityX = 0;
         velocityY = 1;
+        bot.play();
     }
     else if (e.code == "ArrowLeft" && velocityX != 1) {
         velocityX = -1;
         velocityY = 0;
+        left.play();
     }
     else if (e.code == "ArrowRight" && velocityX != -1) {
         velocityX = 1;
         velocityY = 0;
+        right.play();
     }
 }
 function placeFood() {
@@ -119,9 +147,11 @@ function placeFood() {
 }
 
 resetbtn.addEventListener("click", function(){
-    window.location.reload();
+    reset.play();
+    setTimeout(() => {window.location.reload();}, 300);
 });
 
 resetbtn2.addEventListener("click", function(){
-    window.location.reload();
+    reset.play();
+    setTimeout(() => {window.location.reload();}, 300);
 });
