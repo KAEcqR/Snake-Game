@@ -120,25 +120,27 @@ function setgameover(){
 }
 
 function changeDirection(e) {
-    if (e.code == "ArrowUp" && velocityY != 1) {
+    if(gameOver != true){
+        if (e.code == "ArrowUp" && velocityY != 1) {
         velocityX = 0;
-        velocityY = -1;
-        up.play();
-    }
-    else if (e.code == "ArrowDown" && velocityY != -1) {
-        velocityX = 0;
-        velocityY = 1;
-        bot.play();
-    }
-    else if (e.code == "ArrowLeft" && velocityX != 1) {
-        velocityX = -1;
-        velocityY = 0;
-        left.play();
-    }
-    else if (e.code == "ArrowRight" && velocityX != -1) {
-        velocityX = 1;
-        velocityY = 0;
-        right.play();
+            velocityY = -1;
+            up.play();
+        }
+        else if (e.code == "ArrowDown" && velocityY != -1) {
+            velocityX = 0;
+            velocityY = 1;
+            bot.play();
+        }
+        else if (e.code == "ArrowLeft" && velocityX != 1) {
+            velocityX = -1;
+            velocityY = 0;
+            left.play();
+        }
+        else if (e.code == "ArrowRight" && velocityX != -1) {
+            velocityX = 1;
+            velocityY = 0;
+            right.play();
+        }
     }
 }
 function placeFood() {
